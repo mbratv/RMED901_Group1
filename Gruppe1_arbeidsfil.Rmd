@@ -1,0 +1,6 @@
+---
+title: "Gruppearbeidsfil"
+author: "Marianne Bråtveit"
+date: "2023-09-11"
+output: html_document
+---
