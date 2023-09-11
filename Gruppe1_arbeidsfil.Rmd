@@ -4,4 +4,4 @@ author: "Marianne Bråtveit"
 date: "2023-09-11"
 output: html_document
 ---
-hjopij
+Kan dere sjekke om dette funker?
