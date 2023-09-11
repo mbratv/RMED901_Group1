@@ -7,3 +7,4 @@ output: html_document
 Kan dere sjekke om dette funker?
 
 Hello?
+check hello
