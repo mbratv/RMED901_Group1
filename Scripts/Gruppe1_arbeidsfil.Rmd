@@ -38,3 +38,8 @@ data <- data %>% rename(BMI = "BMI kg/m2", #renaming columns
 
 
 
+#checking for numbers or spaces in columns
+
+```{r}
+data
+```
