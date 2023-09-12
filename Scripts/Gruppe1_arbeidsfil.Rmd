@@ -7,6 +7,14 @@ Output: html_document
 -----
 #Day 5 - Reading, exploring, tidying and exploring data
 
+```{r}
+library(tidyverse)
+library(here)
+
+here()
+read_delim(here("Data", "exam_data.txt"))
+```
+
 
 
 
