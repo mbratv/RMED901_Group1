@@ -14,19 +14,29 @@ library(tidyverse)
 library(here)
 
 here()
-data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object
-
-head(data)
+data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset 
+data
 
 ```
 
-#Checking for duplicates
+
 ```{r}
-data%>%
+data <- data %>% rename(BMI = "BMI kg/m2", 
+                Attempts = "# attempts",
+                Failures = "# failures")
+```
+
+#Checking for duplicates
+
+```{r}
+trimmed_data <-
+  data%>%
   distinct()
+
 ```
 
 #checking for numbers or spaces in columns
 
-
-
+```{r}
+data
+```
