@@ -28,3 +28,8 @@ data%>%
 #test from branch Jonathan
 
 
+#checking for numbers or spaces in columns
+
+```{r}
+data
+```
