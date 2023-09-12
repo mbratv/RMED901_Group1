@@ -22,7 +22,8 @@ head(data)
 
 #Checking for duplicates
 ```{r}
-data%>%
+trimmed_data <-
+  data%>%
   distinct()
 ```
 
