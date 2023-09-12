@@ -8,6 +8,7 @@ Output: html_document
 -----
 #Day 5 - Reading, exploring, tidying and exploring data
 
+#Importing packages
 ```{r}
 library(tidyverse)
 library(here)
@@ -16,11 +17,16 @@ here()
 data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object
 
 head(data)
-view(data)
 
 ```
 
+#Checking for duplicates
 ```{r}
-
+data%>%
+  distinct()
 ```
+
+#test from branch Jonathan
+
+
 
