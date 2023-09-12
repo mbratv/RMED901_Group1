@@ -14,8 +14,9 @@ library(tidyverse)
 library(here)
 
 here()
-data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset 
+data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object
 
+head(data)
 
 ```
 
