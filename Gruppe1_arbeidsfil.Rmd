@@ -5,9 +5,8 @@ Date: "2023-09-11"
 Output: html_document
 
 -----
-Kan dere sjekke om dette funker?
+#Day 5 - Reading, exploring, tidying and exploring data
 
-Hello?
-check hello
-hellooooo
+
+
 
