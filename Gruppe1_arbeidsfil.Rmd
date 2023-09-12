@@ -1,6 +1,6 @@
 ---- Group 1 Project----
 Title: "RMED901_Group1_Project_110923"
-Author: "Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Chambenoit"
+Authors: "Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Chambenoit"
 Date: "2023-09-11"
 Output: html_document
 -----
@@ -9,3 +9,4 @@ Kan dere sjekke om dette funker?
 Hello?
 check hello
 hellooooo
+
