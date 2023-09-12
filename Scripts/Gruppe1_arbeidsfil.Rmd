@@ -14,9 +14,8 @@ library(tidyverse)
 library(here)
 
 here()
-
-data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object
-head(data)
+data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset 
+data
 
 ```
 
@@ -25,10 +24,8 @@ head(data)
 data%>%
   distinct()
 ```
+
+
 ```{r}
-#hello
+data
 ```
- 
-
-
-
