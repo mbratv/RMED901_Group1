@@ -8,16 +8,17 @@ Output: html_document
 -----
 #Day 5 - Reading, exploring, tidying and exploring data
 
+#Importing packages
 ```{r}
 library(tidyverse)
 library(here)
 
 here()
-data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object
-
-head(data)
+data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset 
+data
 
 ```
+
 
 ```{r}
 data %>% rename(BMI = "BMI kg/m2", 
@@ -25,5 +26,17 @@ data %>% rename(BMI = "BMI kg/m2",
                 Failures = "# failures")
 ```
 
+#Checking for duplicates
 
+```{r}
+trimmed_data <-
+  data%>%
+  distinct()
 
+```
+
+#test from branch Jonathan
+
+```{r}
+data
+```
