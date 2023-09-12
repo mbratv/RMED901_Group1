@@ -19,9 +19,9 @@ data
 
 ```
 
-
+#Tidying data 
 ```{r}
-data <- data %>% rename(BMI = "BMI kg/m2", 
+data <- data %>% rename(BMI = "BMI kg/m2", #renaming columns 
                 Attempts = "# attempts",
                 Failures = "# failures")
 ```
@@ -37,7 +37,10 @@ data <- data %>%
 #checking for numbers or spaces in columns
 
 ```{r}
-data <- data %>% 
+data <- data %>% rename(BMI = "BMI kg/m2", #renaming columns 
+                Attempts = "# attempts",
+                Failures = "# failures") %>% 
+  distinct() %>% #removing duplicates
   pivot_wider(names_from = difficulties_intubating_feature, 
               values_from = difficulties_intubating_value) %>% 
   #Creating three new columns by pivoting wider 
