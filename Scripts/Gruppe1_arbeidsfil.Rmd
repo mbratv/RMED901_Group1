@@ -21,7 +21,7 @@ data
 
 
 ```{r}
-data %>% rename(BMI = "BMI kg/m2", 
+data <- data %>% rename(BMI = "BMI kg/m2", 
                 Attempts = "# attempts",
                 Failures = "# failures")
 ```
