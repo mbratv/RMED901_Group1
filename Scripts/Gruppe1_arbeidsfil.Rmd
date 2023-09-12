@@ -29,8 +29,7 @@ data <- data %>% rename(BMI = "BMI kg/m2",
 #Checking for duplicates
 
 ```{r}
-trimmed_data <-
-  data%>%
+data <- data %>%
   distinct()
 
 ```
@@ -38,5 +37,17 @@ trimmed_data <-
 #checking for numbers or spaces in columns
 
 ```{r}
-data
+data <- data %>% 
+  pivot_wider(names_from = difficulties_intubating_feature, 
+              values_from = difficulties_intubating_value) %>% 
+  #Creating three new columns by pivoting wider 
+  separate(col = last_method_S_F,
+           into = c("last_method", "last_method_S_F"),
+           sep = "_") %>% #Splitting the last_method_S_F column into two different columns
+  mutate(last_method_S_F = as.double(last_method_S_F),
+         last_method = as.double(last_method)) #converting these two columns to numeric columns as they were turned into character columns when splitting them
+  
 ```
+
+
+
