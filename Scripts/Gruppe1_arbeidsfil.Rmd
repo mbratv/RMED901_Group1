@@ -15,7 +15,7 @@ library(here)
 
 here()
 data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset 
-
+data
 
 ```
 
@@ -24,7 +24,10 @@ data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset
 data%>%
   distinct()
 ```
-
+```{r}
+#hello
+```
+ 
 
 
 
