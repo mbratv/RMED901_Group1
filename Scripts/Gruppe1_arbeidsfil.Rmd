@@ -51,11 +51,3 @@ data <- data %>% rename(BMI = "BMI kg/m2", #renaming columns
          last_method = as.double(last_method)) #converting these two columns to numeric columns as they were turned into character columns when splitting them
   
 ```
-
-
-
-#checking for numbers or spaces in columns
-
-```{r}
-data
-```
