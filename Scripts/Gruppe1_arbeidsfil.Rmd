@@ -149,8 +149,7 @@ _(each person chooses min.one question)_
 joined_df %>% 
   ggplot(aes(x = gender, y = age)) + geom_point() # Checking first with a scatterplot
 
-ggplot(joined_df, aes(x = age, fill = gender)) +
-  geom_density(alpha = 0.5) # Density plot of the age distribution depending on gender I LIKE THIS THE BEST FOR AGE AND GENDER
+joined_df %>% ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5)   # Density plot of the age distribution depending on gender I LIKE THIS THE BEST FOR AGE AND GENDER. also recommend writing the plots like this as opposed to the other way of writing it (like below)
 
 ggplot(joined_df, aes(x = age, fill = gender)) +
   geom_histogram(binwidth = 5, position = "dodge") # Histogram of age depending on gender
