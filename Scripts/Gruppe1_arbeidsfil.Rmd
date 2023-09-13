@@ -72,9 +72,10 @@ joined_df <- og_data %>%
   arrange(id) #%>%  # The id's in our dataset are already in increasing order, but we could have used the code arrange(desc(id)) if we wanted to change them into descending order. 
 
 
-joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) #Checking for missing values in the dataset. There is 2 missing values for BMI,  1 for sore_throat, mallampati and mallampati_asa
+joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) #Checking for missing values in the dataset. There are 2 missing values for BMI,  1 for sore_throat, 1 for mallampati and 1 for mallampati_asa
 
-#Stratifying the dataset for a categorical column (choosing the column gender) and reporting min, max, mean and sd of a numeric column (choosing the column total_intubation_time)
+
+#Stratifying the dataset for a categorical column (chose the column gender) and reporting min, max, mean and sd of a numeric column (chose the column total_intubation_time)
 joined_df %>% 
   group_by(gender) %>% 
   summarise(
@@ -84,10 +85,11 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
 
 
-#Stratifying our data by a categorical column and reporting min, max, mean and sd of a numeric column for a defined set of observations 
+#Stratifying our data by a categorical column and reporting min, max, mean and sd of a numeric column for a defined set of observations:
 
 # Only for persons with BMI <= 40
 joined_df %>% 
+  group_by(gender) %>% 
   filter(BMI <= 40) %>% 
    summarise(
     min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
@@ -97,6 +99,7 @@ joined_df %>%
 
 #only for females
 joined_df %>% 
+  group_by(Randomization) %>% 
   filter(gender == "Female") %>% 
    summarise(
     min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
@@ -106,6 +109,7 @@ joined_df %>%
 
 # Only for those above the age of 45
 joined_df %>% 
+  group_by(Attempts) %>% 
   filter(age > 45) %>% 
    summarise(
     min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
@@ -115,6 +119,7 @@ joined_df %>%
 
 # Only for those with mallampati score above or equal to 2
 joined_df %>% 
+  group_by(Failures) %>% 
   filter(Mallampati >= 2) %>% 
    summarise(
     min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
@@ -122,5 +127,9 @@ joined_df %>%
     mean_total_intubation_time = mean(total_intubation_time, na.rm = TRUE),
     sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
   
+# Used two categorical columns in our dataset to create a table:
+CC_table <- joined_df %>%
+  count(gender, Attempts)
+ 
 ```
 
