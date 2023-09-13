@@ -1,3 +1,4 @@
+
 -------
 # Group 1 Project
 Title: "RMED901_Group1_Project_110923"
@@ -131,5 +132,34 @@ joined_df %>%
 ```{r}
 CC_table <- joined_df %>%
   count(gender, Attempts)
+```
+
+# Day 7: Create plots that would help answer these questions:
+_(each person chooses min.one question)_
+
+    - Are there any correlated measurements?
+    - Does the age distribution depend on `gender`?
+    - Does BMI depend on `age`?
+    - Do age and BMI have a linear relationship?
+    - Does number of failures change with age?
+    
+```{r}
+
+#Checking if age distribution depends on gender:
+joined_df %>% 
+  ggplot(aes(x = gender, y = age)) + geom_point() # Checking first with a scatterplot
+
+ggplot(joined_df, aes(x = age, fill = gender)) +
+  geom_density(alpha = 0.5) # Density plot of the age distribution depending on gender
+
+ggplot(joined_df, aes(x = age, fill = gender)) +
+  geom_histogram(binwidth = 5, position = "dodge") # Histogram of age depending on gender
+
+ggplot(joined_df, aes(x = age, fill = BMI)) +
+  geom_density(alpha = 0.5)
+
+ggplot(joined_df, aes(x = BMI, y = age)) +
+  geom_point() + geom_line()
+
 ```
 
