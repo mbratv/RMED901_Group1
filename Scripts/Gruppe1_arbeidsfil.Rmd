@@ -41,7 +41,7 @@ tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns
 ## Removing the uncessesarry rows "month" and "year"
 
 ```{r}
-og_data <- tidy_data %>% select(-c(month, year)) # Removing the columns month and year 
+data2 <- tidy_data %>% select(-c(month, year)) # Removing the columns month and year 
  
 ```
 ## Adding the additional dataset to our environment
@@ -51,16 +51,16 @@ ad_df <- read_delim(here("Data", "exam_data_join.txt")) # Importing the addition
 
 ## Joining the two datasets
 ```{r}
-joined_df <- og_data %>% 
+joined_df <- data2 %>% 
   left_join(ad_df, by = "id") %>%  # Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets
   distinct() %>% # Removing duplicates
  mutate(gender = if_else(gender == 0, "Female", "Male"), # Could also have used the function case_when like this: mutate(gender =case_when(gender == "0" ~ "Female", gender == "1" ~ "Male"))
         Mallampati_asa = (asa*Mallampati), # Adding a column multiplicating the columns asa and Mallampati ) # Changing the column gender to character observations
         Ease_quartile = cut(ease, breaks = 4), # Creating a new column with quartile-values for the ease-column 
-        Method_check = ifelse(last_method == Randomization, "True", "False")) %>%  # Creating a new column that checks whether the column "last method" contains the same values as the column "Randomization) 
+        Method_check = if_else(last_method == Randomization, "True", "False")) %>%  # Creating a new column that checks whether the column "last method" contains the same values as the column "Randomization) 
 
-  select(id, gender, age, BMI, everything()) %>%  #Changing the order of the columns so that gender is at the beginning of the dataset. 
-  arrange(id) #%>%  # The id's in our dataset are already in increasing order, but we could have used the code arrange(desc(id)) if we wanted to change them into descending order. 
+  select(id, gender, age, everything()) %>%  #Changing the order of the columns so that id, gender and age is at the beginning of the dataset. 
+  arrange(id) #%>%  # The id's in our dataset are already in increasing order
 
 ```
 
@@ -150,13 +150,13 @@ joined_df %>%
   ggplot(aes(x = gender, y = age)) + geom_point() # Checking first with a scatterplot
 
 ggplot(joined_df, aes(x = age, fill = gender)) +
-  geom_density(alpha = 0.5) # Density plot of the age distribution depending on gender
+  geom_density(alpha = 0.5) # Density plot of the age distribution depending on gender I LIKE THIS THE BEST FOR AGE AND GENDER
 
 ggplot(joined_df, aes(x = age, fill = gender)) +
   geom_histogram(binwidth = 5, position = "dodge") # Histogram of age depending on gender
 
 ggplot(joined_df, aes(x = age, fill = BMI)) +
-  geom_density(alpha = 0.5)
+  geom_density(alpha = 0.5) 
 
 ggplot(joined_df, aes(x = BMI, y = age)) +
   geom_point() + geom_line()
