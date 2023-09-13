@@ -65,5 +65,7 @@ joined_df1 <- joined_df %>% mutate(gender = recode(gender, `0` = "female", `1` =
 
 joined_df2 <- joined_df1 %>% mutate(Mallampati_asa = (asa*Mallampati)) # Adding a column multiplicating the columns asa and Mallampati
 
+joined_df2 %>% mutate(ease_quartile = cut(ease, breaks = 4)) # Trying to make a quartile-column
+
 ```
 
