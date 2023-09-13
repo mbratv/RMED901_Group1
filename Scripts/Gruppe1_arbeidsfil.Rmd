@@ -147,7 +147,7 @@ _(each person chooses min.one question)_
 
 #Checking if age distribution depends on gender:
 joined_df %>% 
-  ggplot(aes(x = gender, y = age)) + geom_point() # Checking first with a scatterplot
+  ggplot(aes(x = age, y = BMI)) + geom_point() + geom_smooth(method = "lm", se = F) # Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot.
 
 joined_df %>% ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5)   # Density plot of the age distribution depending on gender I LIKE THIS THE BEST FOR AGE AND GENDER. also recommend writing the plots like this as opposed to the other way of writing it (like below)
 
