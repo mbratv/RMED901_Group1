@@ -55,14 +55,15 @@ tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns
         - Only for persons with Mallampati score of 2 or more
     - Use two categorical columns in your dataset to create a table (hint: ?count)
 ```{r}
-data <- tidy_data %>% select(-c(month, year)) # Removing the columns month and year 
+og_data <- tidy_data %>% select(-c(month, year)) # Removing the columns month and year 
 
 ad_df <- read_delim(here("Data", "exam_data_join.txt")) # Importing the additional dataset and assigning it to an object
 
+joined_df <- og_data %>% left_join(ad_df, by = "id") %>% distinct() # Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets.
 
-joined_df <- data %>% left_join(ad_df, by = "id") # Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets.
+joined_df1 <- joined_df %>% mutate(gender = recode(gender, `0` = "female", `1` = "male")) # Changing the column gender to character observations
 
-joined_df %>% mutate(gender)
+joined_df2 <- joined_df1 %>% mutate(Mallampati_asa = (asa*Mallampati)) # Adding a column multiplicating the columns asa and Mallampati
 
 ```
 
