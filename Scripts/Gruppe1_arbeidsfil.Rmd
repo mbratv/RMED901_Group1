@@ -79,10 +79,10 @@ joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) #Checking for miss
 joined_df %>% 
   group_by(gender) %>% 
   summarise(
-    min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
-    max_total_intubation_time = max(total_intubation_time, na.rm = TRUE),
-    mean_total_intubation_time = mean(total_intubation_time, na.rm = TRUE),
-    sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
+    min_total_intubation_time = min(total_intubation_time, na.rm = T),  #It is possible to use na.rm = T instead of writing TRUE (it does the same)
+    max_total_intubation_time = max(total_intubation_time, na.rm = T),
+    mean_total_intubation_time = mean(total_intubation_time, na.rm = T),
+    sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 
 
 #Stratifying our data by a categorical column and reporting min, max, mean and sd of a numeric column for a defined set of observations:
@@ -92,40 +92,40 @@ joined_df %>%
   group_by(gender) %>% 
   filter(BMI <= 40) %>% 
    summarise(
-    min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
-    max_total_intubation_time = max(total_intubation_time, na.rm = TRUE),
-    mean_total_intubation_time = mean(total_intubation_time, na.rm = TRUE),
-    sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
+    min_total_intubation_time = min(total_intubation_time, na.rm = T),
+    max_total_intubation_time = max(total_intubation_time, na.rm = T),
+    mean_total_intubation_time = mean(total_intubation_time, na.rm = T),
+    sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 
 #only for females
 joined_df %>% 
   group_by(Randomization) %>% 
   filter(gender == "Female") %>% 
    summarise(
-    min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
-    max_total_intubation_time = max(total_intubation_time, na.rm = TRUE),
-    mean_total_intubation_time = mean(total_intubation_time, na.rm = TRUE),
-    sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
+    min_total_intubation_time = min(total_intubation_time, na.rm = T),
+    max_total_intubation_time = max(total_intubation_time, na.rm = T),
+    mean_total_intubation_time = mean(total_intubation_time, na.rm = T),
+    sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 
 # Only for those above the age of 45
 joined_df %>% 
   group_by(Attempts) %>% 
   filter(age > 45) %>% 
    summarise(
-    min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
-    max_total_intubation_time = max(total_intubation_time, na.rm = TRUE),
-    mean_total_intubation_time = mean(total_intubation_time, na.rm = TRUE),
-    sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
+    min_total_intubation_time = min(total_intubation_time, na.rm = T),
+    max_total_intubation_time = max(total_intubation_time, na.rm = T),
+    mean_total_intubation_time = mean(total_intubation_time, na.rm = T),
+    sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 
 # Only for those with mallampati score above or equal to 2
 joined_df %>% 
   group_by(Failures) %>% 
   filter(Mallampati >= 2) %>% 
    summarise(
-    min_total_intubation_time = min(total_intubation_time, na.rm = TRUE),
-    max_total_intubation_time = max(total_intubation_time, na.rm = TRUE),
-    mean_total_intubation_time = mean(total_intubation_time, na.rm = TRUE),
-    sd_total_intubation_time = sd(total_intubation_time, na.rm = TRUE))
+    min_total_intubation_time = min(total_intubation_time, na.rm = T),
+    max_total_intubation_time = max(total_intubation_time, na.rm = T),
+    mean_total_intubation_time = mean(total_intubation_time, na.rm = T),
+    sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
   
 # Used two categorical columns in our dataset to create a table:
 CC_table <- joined_df %>%
