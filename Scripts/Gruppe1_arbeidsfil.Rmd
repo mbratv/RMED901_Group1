@@ -162,7 +162,7 @@ ggplot(joined_df, aes(x = BMI, y = age)) +
 
 ```
 
-#Does the age distribution depend on gender
+#Does number of failures change with age
 ```{r}
 #trying this question
 ```
