@@ -13,6 +13,7 @@ Output: html_document
 ```{r}
 library(tidyverse)
 library(here)
+library(GGally)
 
 here()
 data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object "data".
@@ -142,7 +143,15 @@ _(each person chooses min.one question)_
     - Does BMI depend on `age`?
     - Do age and BMI have a linear relationship?
     - Does number of failures change with age?
-    
+
+#Correlated measurements
+```{r}
+joined_df%>%
+  ggcorr() #creating heat map to compare all variables and see trends of correlations
+
+```
+The above heat map highlights any potential correlations between the variables in the data set.
+
 ### Checking if age distribution depends on gender:
 ```{r}
 ggplot(joined_df, aes(x = age, fill = gender)) +
