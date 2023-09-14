@@ -165,10 +165,11 @@ ggplot(joined_df, aes(x = BMI, y = age)) +
 #checking Does number of failures depend on age?
 joined_df %>% 
   ggplot(aes(x = age, y = Failures)) + geom_point() + geom_smooth(method = "lm", se = F) # does not look good at all, unless find a way to exclude 0 values
-joined_df %>% ggplot(aes(x = age, fill = Failures)) + geom_density(alpha = 0.5,fill= "blue")+theme_minimal()+labs(title = "Age vs Failures")+ylab("Density of Failures")+theme(plot.title = element_text(hjust =0.5 ))+scale_x_continuous(name = "Age",limits = c(20,80))+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+joined_df %>% ggplot(aes(x = age, fill = Failures)) + geom_density(alpha = 0.5,fill= "blue")+ #Made the space underneath the plot blue
+  theme_minimal()+labs(title = "Age vs Failures")+ylab("Density of Failures")+theme(plot.title = element_text(hjust =0.5 ))+scale_x_continuous(name = "Age",limits = c(20,80))+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"))
-
-ggsave(here("processed_data","Age_v_Failure_density"))
+#Generally removing the background color and grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast.
+#ggsave(here("processed_data","Age_v_Failure_density"))
 #ok looks a little bit like something
 ggplot(joined_df, aes(x = age, fill = Failures)) +
   geom_histogram(binwidth = 2, position = "stack")+theme_minimal()+ labs(title ="Age vs Intubation Failures")+ xlab("Age") + ylab("Number of Failures")
