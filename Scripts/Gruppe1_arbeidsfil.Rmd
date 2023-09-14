@@ -164,10 +164,19 @@ The BMI is slightly depended on age, where BMI is at its highest around 20 years
 
 # Does number of failures change with age
 ```{r}
-#trying this question
-joined_df %>% ggplot(aes(x = age, fill = Failures)) + geom_density(alpha = 0.5,fill= "blue") + #Made the space underneath the plot blue
-theme_minimal()+labs(title = "Age vs Failures")+ylab("Density of Failures")+theme(plot.title = element_text(hjust =0.5 ))+scale_x_continuous(name = "Age",limits = c(20,80))+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black"))
+#creating a density plot
+
+joined_df %>% 
+  ggplot(aes(x = age, fill = Failures)) + 
+  geom_density(alpha = 0.5,fill= "blue") + # Made the space underneath the                                               # plot blue
+  labs(title = "Age vs. Failures") + 
+  ylab("Density of Failures") + 
+  theme(plot.title = element_text(hjust = 0.5 )) + 
+  scale_x_continuous(name = "Age", limits = c(20,80)) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")
+        )
 #Generally removing the background color and grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast.
+
+
 ```
 
