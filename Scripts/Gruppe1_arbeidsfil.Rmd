@@ -157,13 +157,11 @@ panel.background = element_blank(), axis.line = element_line(colour = "black")) 
 ### Checking if age and BMI have a linear relationship
 ```{r}
 joined_df %>% 
-  ggplot(aes(x = age, y = BMI)) + geom_point() + geom_smooth(method = "lm", se = F) # Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot.
+  ggplot(aes(x = age, y = BMI)) + geom_point() + geom_smooth(method = "lm") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + scale_x_continuous(name = "Age",limits = c(20,80))    # Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. 
 
-ggplot(joined_df, aes(x = age, fill = BMI)) +
-  geom_density(alpha = 0.5) 
+#The 
 
-ggplot(joined_df, aes(x = BMI, y = age)) +
-  geom_point() + geom_line()
 ```
 
 # Does number of failures change with age
