@@ -151,7 +151,6 @@ joined_df %>% ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5)   
 ggplot(joined_df, aes(x = age, fill = gender)) +
   geom_histogram(binwidth = 5, position = "dodge") # Histogram of age depending on gender
 
-
 #Checking if age and BMI have a linear relationship
 joined_df %>% 
   ggplot(aes(x = age, y = BMI)) + geom_point() + geom_smooth(method = "lm", se = F) # Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot.
