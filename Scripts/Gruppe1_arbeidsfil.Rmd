@@ -150,7 +150,7 @@ ggplot(joined_df, aes(x = age, fill = gender)) +
 
 joined_df %>% 
   ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black")) + scale_x_continuous(name = "Age",limits = c(20,80))   # Density plot of the age distribution depending on gender
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + scale_x_continuous(name = "Age",limits = c(20,80))   # Density plot of the age distribution depending on gender. We removed the grey background and the major and minor grids. We set the colour of the axis to black. We set the x-axis limit from 20 to 80.
 
 ```
     
