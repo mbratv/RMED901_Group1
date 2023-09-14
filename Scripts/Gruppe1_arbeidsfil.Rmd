@@ -154,15 +154,8 @@ panel.background = element_blank(), axis.line = element_line(colour = "black")) 
 
 ```
     
-    
+### Checking if age and BMI have a linear relationship
 ```{r}
-
-
-
-
-
-
-#Checking if age and BMI have a linear relationship
 joined_df %>% 
   ggplot(aes(x = age, y = BMI)) + geom_point() + geom_smooth(method = "lm", se = F) # Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot.
 
@@ -173,7 +166,7 @@ ggplot(joined_df, aes(x = BMI, y = age)) +
   geom_point() + geom_line()
 ```
 
-#Does number of failures change with age
+# Does number of failures change with age
 ```{r}
 #trying this question
 joined_df %>% ggplot(aes(x = age, fill = Failures)) + geom_density(alpha = 0.5,fill= "blue")+theme_minimal()+labs(title = "Age vs Failures")+ylab("Density of Failures")+theme(plot.title = element_text(hjust =0.5 ))+scale_x_continuous(name = "Age",limits = c(20,80))+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
