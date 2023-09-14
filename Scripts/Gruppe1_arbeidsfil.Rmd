@@ -165,7 +165,8 @@ ggplot(joined_df, aes(x = BMI, y = age)) +
 #Does number of failures change with age
 ```{r}
 #trying this question
-joined_df %>% ggplot(aes(x = age, fill = Failures)) + geom_density(alpha = 0.5)+theme_minimal()+labs(title = "Age vs Failures")+ylab("Density of Failures")+theme(plot.title = element_text(hjust =0.5 ))+scale_x_continuous(name = "Age",limits = c(20,80))
+joined_df %>% ggplot(aes(x = age, fill = Failures)) + geom_density(alpha = 0.5,fill= "blue")+theme_minimal()+labs(title = "Age vs Failures")+ylab("Density of Failures")+theme(plot.title = element_text(hjust =0.5 ))+scale_x_continuous(name = "Age",limits = c(20,80))+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
 #Could also do a histogram, though somehow couldn't get it pretty
 ```
 
