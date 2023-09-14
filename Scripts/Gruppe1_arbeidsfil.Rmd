@@ -162,7 +162,7 @@ ggplot(joined_df, aes(x = BMI, y = age)) +
 
 ```
 
-#Does BMI depend on age
+#Does the age distribution depend on gender
 ```{r}
 #trying this question
 ```
