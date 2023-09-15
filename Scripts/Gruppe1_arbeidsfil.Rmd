@@ -17,7 +17,7 @@ library(GGally)
 
 here()
 data <- read_delim(here("Data", "exam_data.txt")) # Assigning the dataset to an object "data".
-data
+data # To show the data.
 ```
 
 ## Final tidy data at the end of Day 5
@@ -147,7 +147,8 @@ _(each person chooses min.one question)_
 ```{r}
 # Creating heat map to compare all variables and see trends of correlations
 # Note that the non-numeric columns gender, Ease_quartile and Method_check are not included in the heat map
-# We see that XXX... is positively correlated with XXX and XXX is negatively correlated with XXX
+# We see that id is positively correlated with randomization and last_method as well as failures with attempts and intubation time, and attempts and intubation time. Intubation_overall_S_F is negatively correlated with bleed, ease, sore throat, total_intubation_time, failures, attempts. View and ease are also negatively correlated.
+
 joined_df %>%
   ggcorr(label = F, label_size = 3, label_round = 2,
             label_alpha = TRUE, hjust = 1, size = 2) + # Moved the column labels
@@ -183,7 +184,7 @@ joined_df %>%
         axis.line = element_line(colour = "black")) + 
   scale_x_continuous(name = "Age",limits = c(20,80))    
 
-# Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. 
+# Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line with standard deviation) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. 
 ```
 The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
 
@@ -193,7 +194,7 @@ The BMI is slightly depended on age, where BMI is at its highest around 20 years
 
 joined_df %>% 
   ggplot(aes(x = age, fill = Failures)) + 
-  geom_density(alpha = 0.5,fill= "blue") + # Made the space underneath the plot blue
+  geom_density(alpha = 0.5,fill= "blue") + # Made the area under the curve blue
   labs(title = "Age vs. Failures") + 
   ylab("Density of Failures") + 
   theme(plot.title = element_text(hjust = 0.5 ), 
@@ -223,8 +224,10 @@ second question is answered in heat map
 
 #Comparing Total Intubation time by Gender
 ```{r}
+# Making a box plot to compare the two gender categories.
+
 ggplot(joined_df, aes(y=gender, x=total_intubation_time, fill=gender)) +
-  geom_boxplot() + # Making a box plot to compare the two gender categories
+  geom_boxplot() + 
 labs(x="Total Intubation Time in min", y="Gender", fill="Gender") +
   theme_minimal() + 
   labs(title = "Total Intubation Time by Gender") +
