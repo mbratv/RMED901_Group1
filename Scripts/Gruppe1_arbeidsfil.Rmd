@@ -18,7 +18,6 @@ library(GGally)
 here()
 data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object "data".
 data
-bb
 ```
 
 ## Final tidy data at the end of Day 5
