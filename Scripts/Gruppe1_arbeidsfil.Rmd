@@ -220,7 +220,7 @@ _(each person chooses one question)_
     - According to the data, was there a difference of total intubation time between gender categories? 
     
     
-second question is answered in heat map
+The second question is answered in heat map above. The randomization is slightly negativeliy correlated with BMI. 
 
 #Comparing Total Intubation time by Gender
 ```{r}
@@ -234,3 +234,8 @@ labs(x="Total Intubation Time in min", y="Gender", fill="Gender") +
   theme(plot.title = element_text(hjust =0.5 )) # Layout design for the plot
 ```
 This graph highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
+
+```{r}
+sessioninfo()
+```
+
