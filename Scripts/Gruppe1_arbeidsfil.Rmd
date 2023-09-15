@@ -151,6 +151,7 @@ joined_df%>%
   ggcorr(label = F, label_size = 3, label_round = 2,
             label_alpha = TRUE, hjust = 1, size = 2)#moves labels to the side
 + labs(title="Correlation Map of Variables")+theme(plot.title = element_text(hjust =0.5 )) #adds a title centered in the middle
+#note that the non numeric columns gender, Ease_quartile and Method_check are not included in the heat map
 
 ```
 The above heat map highlights any potential correlations between the variables in the data set.
