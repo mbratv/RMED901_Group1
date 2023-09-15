@@ -204,6 +204,15 @@ _(each person chooses one question)_
 second question is answered in heat map
 first one isn't because gender isn't on there
 
+```{r}
+joined_df%>%
+  ggplot(aes(x=Randomization, fill=gender))+
+  geom_histogram()
+#well that doesn't look good, would like to remove values between and maybe separate male and female?
+```
+
+
+
 
 #Comparing Total Intubation time by Gender
 ```{r}
