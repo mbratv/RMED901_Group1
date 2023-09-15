@@ -14,6 +14,7 @@ Output: html_document
 library(tidyverse)
 library(here)
 library(GGally)
+library(broom)
 
 here()
 data <- read_delim(here("Data", "exam_data.txt")) # Assigning the dataset to an object "data".
