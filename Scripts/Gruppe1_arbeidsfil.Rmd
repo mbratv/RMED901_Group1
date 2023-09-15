@@ -146,9 +146,11 @@ _(each person chooses min.one question)_
 
 #Correlated measurements
 ```{r}
+#creating heat map to compare all variables and see trends of correlations
 joined_df%>%
   ggcorr(label = F, label_size = 3, label_round = 2,
-            label_alpha = TRUE, hjust = 1, size = 2) #creating heat map to compare all variables and see trends of correlations
+            label_alpha = TRUE, hjust = 1, size = 2)#moves labels to the side
++ labs(title="Correlation Map of Variables")+theme(plot.title = element_text(hjust =0.5 )) #adds a title centered in the middle
 
 ```
 The above heat map highlights any potential correlations between the variables in the data set.
