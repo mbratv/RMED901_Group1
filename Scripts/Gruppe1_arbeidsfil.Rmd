@@ -1,15 +1,18 @@
-
--------
-# Group 1 Project
-Title: "RMED901_Group1_Project_110923"
-Authors: "Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Chambenoit"
+---
+title: "RMED901_Group1_Project_110923"
+Authors: Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Chambenoit
 Date: "2023-09-11"
-Output: html_document
+output:
+  html_document:
+    toc: true
+    code_folding: hide
+---
 
------
-#Day 5 - Reading, exploring, tidying and exploring data
+# Day 5 - Reading, exploring, tidying and exploring data
 
-#Importing packages
+## Importing packages
+Assigning the dataset to an object "data".
+
 ```{r}
 library(tidyverse)
 library(here)
@@ -17,11 +20,13 @@ library(GGally)
 library(broom)
 
 here()
-data <- read_delim(here("Data", "exam_data.txt")) # Assigning the dataset to an object "data".
-data # To show the data.
+data <- read_delim(here("Data", "exam_data.txt")) 
+
+data
 ```
 
 ## Final tidy data at the end of Day 5
+We renamed columns, removed duplicates, created three new columns by pivoting wider, splitted a column into two columns and converted some columns that became character columns into numeric columns.
 ```{r}
 tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns 
                 Attempts = "# attempts",
@@ -34,6 +39,8 @@ tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns
            sep = "_") %>% # Splitting the last_method_S_F column into two different columns
   mutate(last_method_S_F = as.double(last_method_S_F),
          last_method = as.double(last_method)) # Converting these two columns to numeric columns as they were turned into character columns when splitting them
+
+tidy_data
   
 ```
 
@@ -42,16 +49,21 @@ tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns
 ## Removing the uncessesarry rows "month" and "year"
 ```{r}
 data2 <- tidy_data %>% select(-c(month, year)) 
+
+data2
  
 ```
 
 ## Adding the additional dataset to our environment
+Imported the additional dataset and assigned it to an object
 ```{r}
-ad_df <- read_delim(here("Data", "exam_data_join.txt")) # Importing the additional dataset and assigning it to an object
+ad_df <- read_delim(here("Data", "exam_data_join.txt")) 
+
+ad_df
 ```
 
 ## Joining the two datasets
-Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets. We have provided further explanatations for each of the functions used inside the code-chunk. 
+Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets. We have provided further explanations for each of the functions used inside the code-chunk.  
 ```{r}
 joined_df <- data2 %>% 
   left_join(ad_df, by = "id") %>%  
@@ -64,12 +76,14 @@ joined_df <- data2 %>%
   select(id, gender, age, everything()) %>%  # Changing the order of the columns so that id, gender and age is at the beginning of the dataset. 
   arrange(id) #%>%  # The id's in our dataset are already in increasing order
 
+joined_df
 ```
 
 ## Checking for missing values in the dataset. 
 There are 2 missing values for BMI,  1 for sore_throat, 1 for mallampati and 1 for mallampati_asa
 ```{r}
 joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) 
+
 ```
 
 ## Stratifying the dataset for a categorical column
@@ -164,7 +178,7 @@ panel.background = element_blank(), axis.line = element_line(colour = "black")) 
 ```
     
 ## Checking if age and BMI have a linear relationship
-Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line with standard deviation) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
+Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line with confidence intervals) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
 ```{r}
 joined_df %>% 
   ggplot(aes(x = age, y = BMI)) + 
