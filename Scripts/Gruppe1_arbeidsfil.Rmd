@@ -236,6 +236,6 @@ labs(x="Total Intubation Time in min", y="Gender", fill="Gender") +
 This graph highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
 
 ```{r}
-sessioninfo()
+sessionInfo()
 ```
 
