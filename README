@@ -63,3 +63,13 @@ To answer "Does the randomization depend on BMI?":
 -assigned the result to new table named "anova_r_BMI"
 -performed tidy function on the new table to clean it up
 -result was that the p-value was not statistically significant
+
+To answer "Is there an association between BMI and total intubation time?":
+-decided to use a scatter plot
+-fitted a regression line to the data
+-showed no clear linear association
+
+To answer "According to the data, was there a difference of total intubation time between gender categories?":
+-chose to use a box plot to compare the intubation time for "gender" variables
+-adjusted elements for design
+-patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category
