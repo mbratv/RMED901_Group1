@@ -16,7 +16,7 @@ library(here)
 library(GGally)
 
 here()
-data <- read_delim(here("Data", "exam_data.txt")) #Assigning the dataset to an object "data".
+data <- read_delim(here("Data", "exam_data.txt")) # Assigning the dataset to an object "data".
 data
 ```
 
@@ -27,23 +27,23 @@ tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns
                 Failures = "# failures") %>% 
   distinct() %>% # Removing duplicates
   pivot_wider(names_from = difficulties_intubating_feature, 
-              values_from = difficulties_intubating_value) %>% 
-  # Creating three new columns by pivoting wider 
+              values_from = difficulties_intubating_value) %>%  # Creating three new columns by pivoting wider 
   separate(col = last_method_S_F,
            into = c("last_method", "last_method_S_F"),
            sep = "_") %>% # Splitting the last_method_S_F column into two different columns
   mutate(last_method_S_F = as.double(last_method_S_F),
-         last_method = as.double(last_method)) #Converting these two columns to numeric columns as they were turned into character columns when splitting them
+         last_method = as.double(last_method)) # Converting these two columns to numeric columns as they were turned into character columns when splitting them
   
 ```
 
 # Day 6
-## Removing the uncessesarry rows "month" and "year"
 
+## Removing the uncessesarry rows "month" and "year"
 ```{r}
 data2 <- tidy_data %>% select(-c(month, year)) # Removing the columns month and year 
  
 ```
+
 ## Adding the additional dataset to our environment
 ```{r}
 ad_df <- read_delim(here("Data", "exam_data_join.txt")) # Importing the additional dataset and assigning it to an object
@@ -54,12 +54,12 @@ ad_df <- read_delim(here("Data", "exam_data_join.txt")) # Importing the addition
 joined_df <- data2 %>% 
   left_join(ad_df, by = "id") %>%  # Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets
   distinct() %>% # Removing duplicates
- mutate(gender = if_else(gender == 0, "Female", "Male"), # Could also have used the function case_when like this: mutate(gender =case_when(gender == "0" ~ "Female", gender == "1" ~ "Male"))
-        Mallampati_asa = (asa*Mallampati), # Adding a column multiplicating the columns asa and Mallampati ) # Changing the column gender to character observations
+ mutate(gender = if_else(gender == 0, "Female", "Male"), # Changing the column gender to show Female and Male 
+        Mallampati_asa = (asa*Mallampati), # Adding a column multiplicating the columns asa and Mallampati
         Ease_quartile = cut(ease, breaks = 4), # Creating a new column with quartile-values for the ease-column 
         Method_check = if_else(last_method == Randomization, "True", "False")) %>%  # Creating a new column that checks whether the column "last method" contains the same values as the column "Randomization) 
 
-  select(id, gender, age, everything()) %>%  #Changing the order of the columns so that id, gender and age is at the beginning of the dataset. 
+  select(id, gender, age, everything()) %>%  # Changing the order of the columns so that id, gender and age is at the beginning of the dataset. 
   arrange(id) #%>%  # The id's in our dataset are already in increasing order
 
 ```
@@ -145,33 +145,45 @@ _(each person chooses min.one question)_
 
 #Correlated measurements
 ```{r}
-#creating heat map to compare all variables and see trends of correlations
-joined_df%>%
+# Creating heat map to compare all variables and see trends of correlations
+# Note that the non-numeric columns gender, Ease_quartile and Method_check are not included in the heat map
+# We see that XXX... is positively correlated with XXX and XXX is negatively correlated with XXX
+joined_df %>%
   ggcorr(label = F, label_size = 3, label_round = 2,
-            label_alpha = TRUE, hjust = 1, size = 2) + 
-  #moves labels to the side
-labs(title="Correlation Map of Variables")+theme(plot.title = element_text(hjust =0.5 )) #adds a title centered in the middle
-#note that the non numeric columns gender, Ease_quartile and Method_check are not included in the heat map
+            label_alpha = TRUE, hjust = 1, size = 2) + # Moved the column labels
+labs(title="Correlation Map of Variables") +
+  theme(plot.title = element_text(hjust =0.5 )) # Adds a title centered in the middle
+
 
 ```
-The above heat map highlights any potential correlations between the variables in the data set.
 
-### Checking if age distribution depends on gender:
+## Checking if age distribution depends on gender:
 ```{r}
 ggplot(joined_df, aes(x = age, fill = gender)) +
   geom_histogram(binwidth = 5, position = "dodge") # Histogram of age depending on gender
 
 joined_df %>% 
-  ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black")) + scale_x_continuous(name = "Age",limits = c(20,80))   # Density plot of the age distribution depending on gender. We removed the grey background and the major and minor grids. We set the colour of the axis to black. We set the x-axis limit from 20 to 80.
+  ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5) + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black")) + 
+  scale_x_continuous(name = "Age",limits = c(20,80))   # Density plot of the age distribution depending on gender. We removed the grey background and the major and minor grids. We set the colour of the axis to black. We set the x-axis limit from 20 to 80.
 
 ```
     
 ### Checking if age and BMI have a linear relationship
 ```{r}
 joined_df %>% 
-  ggplot(aes(x = age, y = BMI)) + geom_point() + geom_smooth(method = "lm") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black")) + scale_x_continuous(name = "Age",limits = c(20,80))    # Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. 
+  ggplot(aes(x = age, y = BMI)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black")) + 
+  scale_x_continuous(name = "Age",limits = c(20,80))    
+
+# Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. 
 ```
 The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
 
@@ -181,16 +193,19 @@ The BMI is slightly depended on age, where BMI is at its highest around 20 years
 
 joined_df %>% 
   ggplot(aes(x = age, fill = Failures)) + 
-  geom_density(alpha = 0.5,fill= "blue") + # Made the space underneath the                                               # plot blue
+  geom_density(alpha = 0.5,fill= "blue") + # Made the space underneath the plot blue
   labs(title = "Age vs. Failures") + 
   ylab("Density of Failures") + 
   theme(plot.title = element_text(hjust = 0.5 ), 
         axis.text.y = element_blank()
         ) + 
   scale_x_continuous(name = "Age", limits = c(20,80)) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black")
   )
-#the background color and grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast.
+# The background color and grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast.
 
 
 ```
@@ -209,9 +224,10 @@ second question is answered in heat map
 #Comparing Total Intubation time by Gender
 ```{r}
 ggplot(joined_df, aes(y=gender, x=total_intubation_time, fill=gender)) +
-  geom_boxplot() + #making a box plot to compare the two gender categories
+  geom_boxplot() + # Making a box plot to compare the two gender categories
 labs(x="Total Intubation Time in min", y="Gender", fill="Gender") +
-  theme_minimal()+ labs(title = "Total Intubation Time by Gender")+
-  theme(plot.title = element_text(hjust =0.5 )) #layout design for the plot
+  theme_minimal() + 
+  labs(title = "Total Intubation Time by Gender") +
+  theme(plot.title = element_text(hjust =0.5 )) # Layout design for the plot
 ```
 This graph highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
