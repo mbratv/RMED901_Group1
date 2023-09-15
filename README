@@ -1,2 +1,39 @@
-READ ME-file for Group 1 project in RMED901
+Project title: RMED901 project - Group 1
+Authors: Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Husebø Chambenoit
+Project date: 2023-09-11 to 2023-09-15
+
+Notes about the first day working together:
+- We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
+- Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown
+
+# First day (day 5 of course) #
+
+Assigned the dataset to the object "data" and explored it
+
+We tidied the dataset
+- renamed the columns BMI kg/m2, # attempts, and # failures to BMI, Attempts, Failures, we felt that these names would be a better fit
+- removed duplicates using the function distinct()
+- created new columns using pivot_wider
+- split last_method column into last_method and last_method_S_F
+	- why?
+- converted these latter columns to the type doubles since they were changed to character type after splitting
+The tidied dataset was assigned to a new object "tidy_data"
+
+# Second day (day 6 of course) #
+
+We did some further tidying of the data by removing unescessary columns month and year (assigned to new object data2), then imported the additional dataset "exam_data_join.txt" (assigned it to new object ad_df)
+
+The two distinct dataset data2 and ad_df were then joined/merged together
+
+When we now had the merged datasets, we further processed the datasets:
+- Changed gender values from 0/1 to Female/Male
+- Added a column with the multiplication of the values of the columns (variables) asa and Mallampati
+- Created a new column with the quartile values of the ease column
+- created a new column that shows if values in "last method" contains the same values as the column "randomization"
+- We changed the order of columns into a preferred order (using the function select)
+
+
+
+
+
 
