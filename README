@@ -40,6 +40,11 @@ To test if any measurements are correlated:
 -included suppressWarnings() to prevent that error message to clean up script
 -adjusted the positioning of the column names on the plot and added a title
 
+To test if age distribution depends on gender:
+-After trying several formats chose a heat map
+-plotted age vs gender, setting the age limits from 20 - 80 which includes everyone in the data set
+-made other cosmetic changes
+
 In order to see if the number of intubation failures changes with age, we explored multiple plots that would best fit this question
 - We made a point plot but found that this would not be the best way to visualize since points could be stacked together, a density plot was further created and we agreed upon that this would be a better visualisation for our question. Much of the code in this section was design oriented.
 
