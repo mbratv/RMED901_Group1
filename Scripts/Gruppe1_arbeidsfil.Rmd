@@ -151,6 +151,8 @@ Decided to choose gender and attempts.
 ```{r}
 CC_table <- joined_df %>%
   count(gender, Attempts)
+
+CC_table
 ```
 
 # Day 7
@@ -182,8 +184,8 @@ Checking if age and BMI have a linear relationship by adding geom_smooth (adds a
 ```{r}
 joined_df %>% 
   ggplot(aes(x = age, y = BMI)) + 
-  geom_point() + 
-  geom_smooth(method = "lm") + 
+  geom_point(na.rm = T) + 
+  geom_smooth(method = "lm", na.rm = T) + 
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
@@ -233,7 +235,7 @@ anova_r_BMI %>% tidy()
 Used a scatterplot with a fitted regression line which is showing that there is no clear linear association.
 ```{r}
 joined_df %>% ggplot(aes(x = total_intubation_time, y = BMI)) + 
-  geom_point() +
+  geom_point(na.rm = T) +
   geom_smooth(method = "lm", na.rm = T) + 
   labs(x="Total intubation time") +
   theme_minimal() + 
@@ -242,10 +244,10 @@ joined_df %>% ggplot(aes(x = total_intubation_time, y = BMI)) +
 ```
 
     
-## The second question is answered in heat map above. The randomization is slightly negatively correlated with BMI. 
+The second question is answered in heat map above. The randomization is slightly negatively correlated with BMI. 
 
 ## Comparing Total Intubation time by Gender
-Making a box plot to compare the two gender categories.
+Making a box plot to compare the two gender categories. The plot highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
 ```{r}
 ggplot(joined_df, aes(y=gender, x=total_intubation_time, fill=gender)) +
   geom_boxplot() + 
@@ -254,7 +256,7 @@ labs(x="Total Intubation Time in min", y="Gender", fill="Gender") +
   labs(title = "Total Intubation Time by Gender") +
   theme(plot.title = element_text(hjust =0.5 )) # Layout design for the plot
 ```
-This graph highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
+
 
 ```{r}
 sessionInfo()
