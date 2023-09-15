@@ -55,5 +55,8 @@ To answer "Does the randomization depend on the gender?":
 -Returned p-value was 0.8 so no statistical significance
 
 To answer "Does the randomization depend on BMI?":
-
-
+-chose to perform anova test
+-Used aov function to take values from "Randomization" and "BMI"
+-assigned the result to new table named "anova_r_BMI"
+-performed tidy function on the new table to clean it up
+-result was that the p-value was not statistically significant
