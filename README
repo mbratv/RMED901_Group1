@@ -4,7 +4,7 @@ Project date: 2023-09-11 to 2023-09-15
 
 Notes about the first day working together:
 - We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
-- Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown
+- Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown. We therefore do not have separate R.script-files as we have done all the work in the rmarkdown-file.
 
 # First day (day 5 of course) #
 
