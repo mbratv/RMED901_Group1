@@ -40,7 +40,7 @@ tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns
 
 ## Removing the uncessesarry rows "month" and "year"
 ```{r}
-data2 <- tidy_data %>% select(-c(month, year)) # Removing the columns month and year 
+data2 <- tidy_data %>% select(-c(month, year)) 
  
 ```
 
@@ -50,9 +50,10 @@ ad_df <- read_delim(here("Data", "exam_data_join.txt")) # Importing the addition
 ```
 
 ## Joining the two datasets
+Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets. We have provided further explanatations for each of the functions used inside the code-chunk. 
 ```{r}
 joined_df <- data2 %>% 
-  left_join(ad_df, by = "id") %>%  # Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets
+  left_join(ad_df, by = "id") %>%  
   distinct() %>% # Removing duplicates
  mutate(gender = if_else(gender == 0, "Female", "Male"), # Changing the column gender to show Female and Male 
         Mallampati_asa = (asa*Mallampati), # Adding a column multiplicating the columns asa and Mallampati
@@ -65,16 +66,18 @@ joined_df <- data2 %>%
 ```
 
 ## Checking for missing values in the dataset. 
+There are 2 missing values for BMI,  1 for sore_throat, 1 for mallampati and 1 for mallampati_asa
 ```{r}
-joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) # There are 2 missing values for BMI,  1 for sore_throat, 1 for mallampati and 1 for mallampati_asa
+joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) 
 ```
 
-## Stratifying the dataset for a categorical column (chose the column gender) and reporting min, max, mean and sd of a numeric column (chose the column total_intubation_time)
+## Stratifying the dataset for a categorical column
+We chose the column gender and are reporting min, max, mean and sd of a numeric column (chose the column total_intubation_time)
 ```{r}
 joined_df %>% 
   group_by(gender) %>% 
   summarise(
-    min_total_intubation_time = min(total_intubation_time, na.rm = T),  #It is possible to use na.rm = T instead of writing TRUE (it does the same)
+    min_total_intubation_time = min(total_intubation_time, na.rm = T), 
     max_total_intubation_time = max(total_intubation_time, na.rm = T),
     mean_total_intubation_time = mean(total_intubation_time, na.rm = T),
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
@@ -128,51 +131,39 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-## Used two categorical columns in our dataset to create a table:
+## Used two categorical columns in our dataset to create a table. 
+Decided to choose gender and attempts. 
 ```{r}
 CC_table <- joined_df %>%
   count(gender, Attempts)
 ```
 
-# Day 7: Create plots that would help answer these questions:
-_(each person chooses min.one question)_
+# Day 7
 
-    - Are there any correlated measurements?
-    - Does the age distribution depend on `gender`?
-    - Does BMI depend on `age`?
-    - Do age and BMI have a linear relationship?
-    - Does number of failures change with age?
-
-#Correlated measurements
+## Correlated measurements
+Creating a heat map to compare all variables and see trends of correlations. Note that the non-numeric columns gender, Ease_quartile and Method_check are not included in the heat map. We see that id is positively correlated with randomization and last_method as well as failures with attempts and intubation time, and attempts and intubation time. Intubation_overall_S_F is negatively correlated with bleed, ease, sore throat, total_intubation_time, failures, attempts. View and ease are also negatively correlated.
 ```{r}
-# Creating heat map to compare all variables and see trends of correlations
-# Note that the non-numeric columns gender, Ease_quartile and Method_check are not included in the heat map
-# We see that id is positively correlated with randomization and last_method as well as failures with attempts and intubation time, and attempts and intubation time. Intubation_overall_S_F is negatively correlated with bleed, ease, sore throat, total_intubation_time, failures, attempts. View and ease are also negatively correlated.
-
 joined_df %>%
   ggcorr(label = F, label_size = 3, label_round = 2,
             label_alpha = TRUE, hjust = 1, size = 2) + # Moved the column labels
 labs(title="Correlation Map of Variables") +
   theme(plot.title = element_text(hjust =0.5 )) # Adds a title centered in the middle
-
-
 ```
 
 ## Checking if age distribution depends on gender:
+Made a density plot of the age distribution depending on gender. We removed the grey background and the major and minor grids. We set the colour of the axis to black. We set the x-axis limit from 20 to 80.
 ```{r}
-ggplot(joined_df, aes(x = age, fill = gender)) +
-  geom_histogram(binwidth = 5, position = "dodge") # Histogram of age depending on gender
-
 joined_df %>% 
   ggplot(aes(x = age, fill = gender)) + geom_density(alpha = 0.5) + 
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black")) + 
-  scale_x_continuous(name = "Age",limits = c(20,80))   # Density plot of the age distribution depending on gender. We removed the grey background and the major and minor grids. We set the colour of the axis to black. We set the x-axis limit from 20 to 80.
+  scale_x_continuous(name = "Age",limits = c(20,80))  
 
 ```
     
-### Checking if age and BMI have a linear relationship
+## Checking if age and BMI have a linear relationship
+Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line with standard deviation) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
 ```{r}
 joined_df %>% 
   ggplot(aes(x = age, y = BMI)) + 
@@ -184,14 +175,12 @@ joined_df %>%
         axis.line = element_line(colour = "black")) + 
   scale_x_continuous(name = "Age",limits = c(20,80))    
 
-# Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line with standard deviation) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. 
 ```
-The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
 
-# Does number of failures change with age
+
+## Does number of failures change with age
+Creating a density plot. Also added a background color and a grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast. We here see that there are more failures with increasing age.
 ```{r}
-#creating a density plot
-
 joined_df %>% 
   ggplot(aes(x = age, fill = Failures)) + 
   geom_density(alpha = 0.5,fill= "blue") + # Made the area under the curve blue
@@ -206,26 +195,43 @@ joined_df %>%
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black")
   )
-# The background color and grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast.
-
 
 ```
 
-4. Day 8: Analyse the dataset and answer the following questions:
-_(each person chooses one question)_
-
-    - Does the randomzation depend on the gender?
-    - Does the randomization depend on BMI?
-    - Is there an association between BMI and total intubation time? 
-    - According to the data, was there a difference of total intubation time between gender categories? 
-    
-    
-The second question is answered in heat map above. The randomization is slightly negativeliy correlated with BMI. 
-
-#Comparing Total Intubation time by Gender
+# Day 8
+ 
+## Checking if randomization is dependent on gender
+Performed a t-test which returned a p-value of 0.8 and therefore is not statistically significant.
 ```{r}
-# Making a box plot to compare the two gender categories.
 
+joined_df %>% t.test(Randomization~gender, data = .)
+
+```
+## Checking if randomization dependent on BMI
+We chose to use an anova test. This showed that the p-value was not statistically significant.
+```{r}
+anova_r_BMI <- joined_df %>% aov(Randomization~BMI, data = .) 
+
+anova_r_BMI %>% tidy() 
+```
+## Checking if there is an association between BMI and total intubation time 
+Used a scatterplot with a fitted regression line which is showing that there is no clear linear association.
+```{r}
+joined_df %>% ggplot(aes(x = total_intubation_time, y = BMI)) + 
+  geom_point() +
+  geom_smooth(method = "lm", na.rm = T) + 
+  labs(x="Total intubation time") +
+  theme_minimal() + 
+  labs(title = "Association between BMI and Total intubation time")
+
+```
+
+    
+## The second question is answered in heat map above. The randomization is slightly negatively correlated with BMI. 
+
+## Comparing Total Intubation time by Gender
+Making a box plot to compare the two gender categories.
+```{r}
 ggplot(joined_df, aes(y=gender, x=total_intubation_time, fill=gender)) +
   geom_boxplot() + 
 labs(x="Total Intubation Time in min", y="Gender", fill="Gender") +
