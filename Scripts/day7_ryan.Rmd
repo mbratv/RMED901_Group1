@@ -146,7 +146,10 @@ _(each person chooses min.one question)_
 ```{r}
 #library(GGally)
 joined_df%>%
-  ggcorr() #creating heat map to compare all variables and see trends of correlations
+  ggcorr(label = F, label_size = 3, label_round = 2,
+            label_alpha = TRUE, hjust = 1, size = 2)
+
+#creating heat map to compare all variables and see trends of correlations
 
 ```
 The above heat map highlights any potential correlations between the variables in the data set.
