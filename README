@@ -45,6 +45,9 @@ To test if age distribution depends on gender:
 -plotted age vs gender, setting the age limits from 20 - 80 which includes everyone in the data set
 -made other cosmetic changes
 
+Checking if age and BMI have a linear relationship
+- Created a scatterplot with age in the x-axis and BMI in the y-axis. Additionally, we added a regression line with confidence intervals (using the geom_smooth function). Removed grey background and the grids using theme function, Finally, we renamed the x-axis to "Age" and set a limited range from 20 to 80 since there are no individuals outside this age range in the dataset.
+
 In order to see if the number of intubation failures changes with age, we explored multiple plots that would best fit this question
 - We made a point plot but found that this would not be the best way to visualize since points could be stacked together, a density plot was further created and we agreed upon that this would be a better visualisation for our question. Much of the code in this section was design oriented.
 
