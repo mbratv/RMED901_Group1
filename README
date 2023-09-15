@@ -25,7 +25,7 @@ We did some further tidying of the data by removing unescessary columns month an
 
 The two distinct dataset data2 and ad_df were then joined/merged together
 
-After merging the datasets, we further processed them:
+The merged dataset was named joined_df and the following changes were made:
 - Changed gender values from 0/1 to Female/Male
 - Added a column with the multiplication of the values of the columns (variables) asa and Mallampati
 - Created a new column with the quartile values of the ease column
