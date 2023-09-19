@@ -6,7 +6,7 @@ Notes about the first day working together:
 - We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
 - Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown. We therefore do not have separate R.script-files as we have done all the work in the rmarkdown-file.
 
-Day 5 – tidying data
+Day 5
 
 - Renamed columns
 - Removed duplicates
@@ -15,7 +15,7 @@ Day 5 – tidying data
 - Converted columns to doubles
 - Saved result as "tidy_data".
 
-# Second day (day 6 of course) #
+Day 6
 
 Further tidying of the data:
 - Removing unnescessary columns
@@ -27,7 +27,7 @@ After joining the two datasets:
 - Changed gender values from numeric to character
 - Mutated new columns
 
-# Third day (day 7 of course) #
+Day 7
 
 Analysis of data
 
@@ -40,7 +40,7 @@ Analysis of data
 - Created a density plot to check whether intubation failures changed with age
 
 
-# Fourth day (day 8 of course) #
+Day 8
 
 Further analysis of data
 - Tested whether randomization depends on gender (t-test)
