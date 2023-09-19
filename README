@@ -6,70 +6,46 @@ Notes about the first day working together:
 - We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
 - Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown. We therefore do not have separate R.script-files as we have done all the work in the rmarkdown-file.
 
-Day 5 – tyding data
+Day 5 – tidying data
 
-- Renamed the columns
+- Renamed columns
 - Removed duplicates
 - Created new columns
-- Split the colums
-- Converted columns to doublets
+- Split columns
+- Converted columns to doubles
 - Saved result as "tidy_data".
 
 # Second day (day 6 of course) #
 
-We did some further tidying of the data by removing unescessary columns "month" and "year" (assigned to new object "data2"), then imported the additional dataset "exam_data_join.txt" (assigned it to new object ad_df).
+Further tidying of the data:
+- Removing unnescessary columns
+- Imported additional dataset
+- Joined the new dataset with the existing one
 
-The two distinct dataset data2 and ad_df were then joined using left_join() function by 'id' as this column was present in both datasets.
-
-The merged dataset was named joined_df and the following changes were made:
-- Removed duplicated by using distinct().
-- Changed gender values from 0/1 to Female/Male.
-- Added a column with the multiplication of the values of the columns "asa" and "Mallampati", named "Mallampati_asa".
-- Created a new column with the quartile values of the ease column, named "Ease_quartile".
-- created a new column that shows if values in "last method" contains the same values as the column "randomization", named "Method_check".
-- We changed the order of columns into a preferred order (using the function select).
+After joining the two datasets:
+- Removed duplicates
+- Changed gender values from numeric to character
+- Mutated new columns
 
 # Third day (day 7 of course) #
 
-To test if any measurements are correlated:
--installed ggally to use ggcorr
--the columns gender, Ease_quartile and Method_check are not numeric and were not included
--included suppressWarnings() to prevent that error message to clean up script
--adjusted the positioning of the column names on the plot and added a title
+Analysis of data
 
-To test if age distribution depends on gender:
--After trying several formats chose a heat map
--plotted age vs gender, setting the age limits from 20 - 80 which includes everyone in the data set
--made other cosmetic changes
+- Tested if measurements were correlated
+- Cleaned up the script
+- Made adjustments to the plots to make them look better
+- Tested whether age distribution depends on gender by creating a plot
+- Tested whether age and BMI had a linear relationship
+- Tested whether BMI depends on age by checking linearity and making a heat map
+- Created a density plot to check whether intubation failures changed with age
 
-Checking if age and BMI have a linear relationship
-- Created a scatterplot with age in the x-axis and BMI in the y-axis. Additionally, we added a regression line with confidence intervals (using the geom_smooth function). Removed grey background and the grids using theme function, Finally, we renamed the x-axis to "Age" and set a limited range from 20 to 80 since there are no individuals outside this age range in the dataset.
-
-Does BMI depend on age?
--This is answered by the linear relationship and heat map. Shows a slight dependence with a negative trend towards higher age, so negative correlation.
-
-In order to see if the number of intubation failures changes with age, we explored multiple plots that would best fit this question
-- We made a point plot but found that this would not be the best way to visualize since points could be stacked together, a density plot was further created and we agreed upon that this would be a better visualisation for our question. Much of the code in this section was design oriented.
 
 # Fourth day (day 8 of course) #
 
-To answer "Does the randomization depend on the gender?":
--Performed a t-test using t.test() function
--Returned p-value was 0.8 so no statistical significance
+Further analysis of data
+- Tested whether randomization depends on gender (t-test)
+- Anova test for whether randomization depends on BMI
+- Scatter plot with regression line to check association between BMI and total intubation time
+- Box plot to test difference of total intubation time differed between genders
 
-To answer "Does the randomization depend on BMI?":
--chose to perform anova test
--Used aov function to take values from "Randomization" and "BMI"
--assigned the result to new table named "anova_r_BMI"
--performed tidy function on the new table to clean it up
--result was that the p-value was not statistically significant
 
-To answer "Is there an association between BMI and total intubation time?":
--decided to use a scatter plot
--fitted a regression line to the data
--showed no clear linear association
-
-To answer "According to the data, was there a difference of total intubation time between gender categories?":
--chose to use a box plot to compare the intubation time for "gender" variables
--adjusted elements for design
--patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category
