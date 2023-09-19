@@ -2,6 +2,12 @@ Project title: RMED901 project - Group 1
 Authors: Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Husebø Chambenoit
 Project date: 2023-09-11 to 2023-09-15
 
+File description:
+- Data: folder containing data, codebook and exam desription
+- Final report: folder containing .Rmd working file and the final report ("Group_1.html")
+- README
+- RMED901_Group1.Rproj
+
 Notes about our project:
 - We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
 - Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown. We therefore do not have separate R.script-files as we have done all the work in the rmarkdown file.
