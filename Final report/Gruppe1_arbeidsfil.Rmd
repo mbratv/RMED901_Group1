@@ -100,7 +100,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-### Only for persons with BMI <= 40
+#### Only for persons with BMI <= 40
 Reporting min, max, mean and sd.
 ```{r}
 joined_df %>% 
@@ -113,7 +113,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-### Only for females
+#### Only for females
 Reporting min, max, mean and sd.
 ```{r}
 joined_df %>% 
@@ -126,7 +126,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-### Only for those above the age of 45
+#### Only for those above the age of 45
 Reporting min, max, mean and sd. 
 ```{r}
 joined_df %>% 
@@ -139,7 +139,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-### Only for those with mallampati score above or equal to 2
+#### Only for those with mallampati score above or equal to 2
 Reporting min, max, mean and sd
 ```{r}
 joined_df %>% 
