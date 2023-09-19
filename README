@@ -2,56 +2,16 @@ Project title: RMED901 project - Group 1
 Authors: Marianne Bråtveit, Eline Hillestad, Ryan Dunkel and Jonathan Husebø Chambenoit
 Project date: 2023-09-11 to 2023-09-15
 
+Folders:
 - Data: folder containing data, codebook and exam desription
 - Final report: folder containing .Rmd working file and the final report ("Group_1.html")
 - README
 - RMED901_Group1.Rproj
 
+Data-folder:
+The codebook, exam description, and data sets ("Laryngoscope Dataset"), were downloaded from Mitt UiB and uploaded in RStudio.
 
 Notes about our project:
 - We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
 - Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown. We therefore do not have separate R.script-files as we have done all the work in the rmarkdown file.
-
-Day 5
-
-- Renamed columns
-- Removed duplicates
-- Created new columns
-- Split columns
-- Converted columns to doubles
-- Saved result as "tidy_data".
-
-Day 6
-
-Further tidying of the data:
-- Removing unnescessary columns
-- Imported additional dataset
-- Joined the new dataset with the existing one
-
-After joining the two datasets:
-- Removed duplicates
-- Changed gender values from numeric to character
-- Mutated new columns
-
-Day 7
-
-Analysis of data
-
-- Tested if measurements were correlated
-- Cleaned up the script
-- Made adjustments to the plots to make them look better
-- Tested whether age distribution depends on gender by creating a plot
-- Tested whether age and BMI had a linear relationship
-- Tested whether BMI depends on age by checking linearity and making a heat map
-- Created a density plot to check whether intubation failures changed with age
-
-
-Day 8
-
-Further analysis of data
-- Tested whether randomization depends on gender (t-test)
-- Anova test for whether randomization depends on BMI
-- Scatter plot with regression line to check association between BMI and total intubation time
-- Box plot to test difference of total intubation time differed between genders
-
-
+- Further explanations about how we explored, tidied, and reformatted the data to answere the exam questions is described in the .Rmd-file
