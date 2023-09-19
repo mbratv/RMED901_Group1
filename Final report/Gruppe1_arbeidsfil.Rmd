@@ -243,9 +243,6 @@ joined_df %>% ggplot(aes(x = total_intubation_time, y = BMI)) +
 
 ```
 
-    
-The second question is answered in heat map above. The randomization is slightly negatively correlated with BMI. 
-
 ## Comparing Total Intubation time by Gender
 Making a box plot to compare the two gender categories. The plot highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
 ```{r}
