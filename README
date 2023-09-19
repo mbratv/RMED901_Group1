@@ -6,16 +6,18 @@ Notes about the first day working together:
 - We started working on our own branches, but had an agreement that it would be easier to work together on the main script where we discuss everything together and one person in the group make the changes
 - Since Marianne had experience with R Markdown, she taught us the basics of R Markdown and we started the project directly in R Markdown. We therefore do not have separate R.script-files as we have done all the work in the rmarkdown-file.
 
-# First day (day 5 of course) #
+Day 5 – tyding data
 
-Assigned the dataset to the object "data" and explored it
-
-We tidied the dataset
 - Renamed the columns "BMI kg/m2", "#attempts", and "#failures" to "BMI", "Attempts", "Failures", we felt that these names would be a better fit.
+
 - Removed duplicates using the function distinct().
+
 - Created new columns using pivot_wider.
+
 - Split the colum "last_method_S_F" (old name) into "last_method" and "last_method_S_F" (new names). The old "last_method_S_F" contained information on both the last method and if the last method was either successful or fail, and we wanted this information seperately in two columns.
+
 - Converted these latter columns to the type doubles since they were changed to character type after splitting.
+
 - The tidied dataset was assigned to a new object "tidy_data".
 
 # Second day (day 6 of course) #
