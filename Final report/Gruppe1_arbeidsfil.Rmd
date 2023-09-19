@@ -8,9 +8,9 @@ output:
     code_folding: hide
 ---
 
-### Day 5 - Reading, exploring, tidying and exploring data
+## Reading, exploring and tidying data
 
-#### Importing packages
+### Importing packages
 Assigning the dataset to an object "data".
 
 ```{r, warning = FALSE, error=FALSE, message = FALSE}
@@ -27,7 +27,7 @@ data <- read_delim(here("Data", "exam_data.txt"))
 data
 ```
 
-#### Tidy dataset
+### Tidy dataset
 We renamed columns, removed duplicates, created three new columns by pivoting wider, splitted a column into two columns and converted some columns that became character columns into numeric columns.
 ```{r}
 tidy_data <- data %>% rename(BMI = "BMI kg/m2", # Renaming columns 
@@ -46,7 +46,7 @@ tidy_data
   
 ```
 
-### Day 6
+## Tidying and exploring data
 
 Removed the unnecessary rows "month" and "year". 
 ```{r}
@@ -56,7 +56,7 @@ data2
  
 ```
 
-#### Adding the additional dataset to our environment
+### Adding the additional dataset to our environment
 Imported the additional dataset and assigned it to an object
 ```{r}
 ad_df <- read_delim(here("Data", "exam_data_join.txt")) 
@@ -64,7 +64,7 @@ ad_df <- read_delim(here("Data", "exam_data_join.txt"))
 ad_df
 ```
 
-#### Joining the two datasets
+### Joining the two datasets
 Deciding to join the original dataframe to the ad_df by the column "id" as this is present in both datasets. We have provided further explanations for each of the functions used inside the code-chunk.  
 ```{r}
 joined_df <- data2 %>% 
@@ -81,14 +81,14 @@ joined_df <- data2 %>%
 joined_df
 ```
 
-#### Checking for missing values in the dataset. 
+### Checking for missing values in the dataset. 
 There are 2 missing values for BMI,  1 for sore_throat, 1 for mallampati and 1 for mallampati_asa
 ```{r}
 joined_df %>% summarise(across(everything(), ~sum(is.na(.)))) 
 
 ```
 
-#### Stratifying the dataset for a categorical column
+### Stratifying the dataset for a categorical column
 We chose the column gender and are reporting min, max, mean and sd of a numeric column (chose the column total_intubation_time)
 ```{r}
 joined_df %>% 
@@ -100,7 +100,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-#### Only for persons with BMI <= 40
+### Only for persons with BMI <= 40
 Reporting min, max, mean and sd.
 ```{r}
 joined_df %>% 
@@ -113,7 +113,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-#### Only for females
+### Only for females
 Reporting min, max, mean and sd.
 ```{r}
 joined_df %>% 
@@ -126,7 +126,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-#### Only for those above the age of 45
+### Only for those above the age of 45
 Reporting min, max, mean and sd. 
 ```{r}
 joined_df %>% 
@@ -139,7 +139,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-#### Only for those with mallampati score above or equal to 2
+### Only for those with mallampati score above or equal to 2
 Reporting min, max, mean and sd
 ```{r}
 joined_df %>% 
@@ -152,7 +152,7 @@ joined_df %>%
     sd_total_intubation_time = sd(total_intubation_time, na.rm = T))
 ```
 
-#### Used two categorical columns in our dataset to create a table. 
+### Used two categorical columns in our dataset to create a table. 
 Decided to choose gender and attempts. 
 ```{r}
 CC_table <- joined_df %>%
@@ -161,9 +161,9 @@ CC_table <- joined_df %>%
 CC_table
 ```
 
-### Day 7
+## Data analysis
 
-#### Correlated measurements
+### Correlated measurements
 Creating a heat map to compare all variables and see trends of correlations. Note that the non-numeric columns gender, Ease_quartile and Method_check are not included in the heat map. We see that id is positively correlated with randomization and last_method as well as failures with attempts and intubation time, and attempts and intubation time. Intubation_overall_S_F is negatively correlated with bleed, ease, sore throat, total_intubation_time, failures, attempts. View and ease are also negatively correlated.
 ```{r}
 joined_df %>%
@@ -173,7 +173,7 @@ labs(title="Correlation Map of Variables") +
   theme(plot.title = element_text(hjust =0.5 )) # Adds a title centered in the middle
 ```
 
-#### Checking if age distribution depends on gender:
+### Checking if age distribution depends on gender:
 Made a density plot of the age distribution depending on gender. We removed the grey background and the major and minor grids. We set the colour of the axis to black. We set the x-axis limit from 20 to 80.
 ```{r}
 joined_df %>% 
@@ -185,7 +185,7 @@ panel.background = element_blank(), axis.line = element_line(colour = "black")) 
 
 ```
     
-#### Checking if age and BMI have a linear relationship
+### Checking if age and BMI have a linear relationship
 Checking if age and BMI have a linear relationship by adding geom_smooth (adds a regression line with confidence intervals) to a scatterplot. Also removed the grey background and the grids. We set the x-asis limit from 20 to 80. The BMI is slightly depended on age, where BMI is at its highest around 20 years of age, and it slightly decreases as age increases. The correlation is therefore negative. 
 ```{r}
 joined_df %>% 
@@ -201,7 +201,7 @@ joined_df %>%
 ```
 
 
-#### Does number of failures change with age
+### Does number of failures change with age
 Creating a density plot. Also added a background color and a grid to make the plot easier to look at. The axes were renamed and the limits of the x axis were set to 20-80 in order to make the plot cleaner. Axis line colors were set to black for increased contrast. We here see that there are more failures with increasing age.
 ```{r}
 joined_df %>% 
@@ -221,23 +221,21 @@ joined_df %>%
 
 ```
 
-### Day 8
- 
-#### Checking if randomization is dependent on gender
+### Checking if randomization is dependent on gender
 Performed a t-test which returned a p-value of 0.8 and therefore is not statistically significant.
 ```{r}
 
 joined_df %>% t.test(Randomization~gender, data = .)
 
 ```
-#### Checking if randomization dependent on BMI
+### Checking if randomization dependent on BMI
 We chose to use an anova test. This showed that the p-value was not statistically significant.
 ```{r}
 anova_r_BMI <- joined_df %>% aov(Randomization~BMI, data = .) 
 
 anova_r_BMI %>% tidy() 
 ```
-#### Checking if there is an association between BMI and total intubation time 
+### Checking if there is an association between BMI and total intubation time 
 Used a scatterplot with a fitted regression line which is showing that there is no clear linear association.
 ```{r}
 joined_df %>% ggplot(aes(x = total_intubation_time, y = BMI)) + 
@@ -249,7 +247,7 @@ joined_df %>% ggplot(aes(x = total_intubation_time, y = BMI)) +
 
 ```
 
-#### Comparing Total Intubation time by Gender
+### Comparing Total Intubation time by Gender
 Making a box plot to compare the two gender categories. The plot highlights that on average, patients in the "Female" category had a shorter overall intubation time than patients in the "Male" category, save for some outliers in the "Female" category.
 ```{r}
 ggplot(joined_df, aes(y=gender, x=total_intubation_time, fill=gender)) +
